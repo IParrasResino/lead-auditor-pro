@@ -1,0 +1,13 @@
+# Python pipeline requirements for Lead Auditor Pro
+# Install with: pip install -r requirements.txt
+
+# HTTP and web scraping
+requests==2.31.0
+beautifulsoup4==4.12.2
+
+# Data processing
+pandas==2.2.0
+openpyxl==3.1.2
+
+# Environment variables
+python-dotenv==1.0.0

@@ -1,0 +1,18 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [
+    "server",
+    "db",
+    "user"
+  ],
+  "dev_command": "pnpm run dev",
+  "dockerfile": true,
+  "use_dockerfile": true,
+  "experiments": [
+    "no_db_push"
+  ],
+  "name": "lead-auditor-pro",
+  "port": 3000,
+  "template_id": "web-db-user",
+  "test_command": "pnpm test"
+}
