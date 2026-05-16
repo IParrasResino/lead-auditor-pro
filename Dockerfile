@@ -12,8 +12,7 @@ RUN apk add --no-cache python3 py3-pip python3-dev build-base
 COPY package.json pnpm-lock.yaml ./
 
 # Install Node dependencies
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
-
+RUN npm install -g pnpm && pnpm install --no-frozen-lockfile
 # Copy source code
 COPY . .
 
