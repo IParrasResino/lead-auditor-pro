@@ -8,24 +8,30 @@ WORKDIR /app
 # Install Python 3 and build tools
 RUN apk add --no-cache python3 py3-pip python3-dev build-base
 
-# Copy package files
+# Install pnpm version compatible with packageManager
+RUN npm install -g pnpm@10.4.1
+
+# Copy package files and patches BEFORE pnpm install
 COPY package.json pnpm-lock.yaml ./
+COPY patches ./patches
 
 # Install Node dependencies
-RUN npm install -g pnpm && pnpm install --no-frozen-lockfile
+RUN pnpm install --no-frozen-lockfile
+
 # Copy source code
 COPY . .
 
 # Build frontend and backend
 RUN pnpm build
 
+
 # Stage 2: Runtime stage
 FROM node:22-alpine
 
 WORKDIR /app
 
-# Install Python 3, pip, and venv
-RUN apk add --no-cache python3 py3-pip python3-dev
+# Install Python 3, pip, and runtime build tools
+RUN apk add --no-cache python3 py3-pip python3-dev build-base
 
 # Copy built artifacts and dependencies from builder
 COPY --from=builder /app/dist ./dist
